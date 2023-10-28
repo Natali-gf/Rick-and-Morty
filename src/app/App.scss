@@ -1,0 +1,14 @@
+@import '../styles/reset.scss';
+
+@font-face {
+	font-family: 'Manrope';
+	src: url(../styles/fonts/Manrope-VariableFont_wght.ttf);
+}
+
+body {
+	margin: 0;
+	font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

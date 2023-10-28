@@ -1,0 +1,29 @@
+$colorBlack: #202329;
+$colorGreyDark: #272B33;
+$colorGrey: #3C3E44;
+$colorBackgroundFill: #000000cc;
+$colorGreyLight: #9E9E9E;
+$colorLight: #F5F5F5;
+$colorGreen: #55CC44;
+$colorBlue: #1976D2;
+$colorRed: #D63D2E;
+$colorBorderGrey: #00000042;
+$colorWhite: #ffffff;
+
+@mixin width-height($width, $height: $width){
+	width: $width;
+	height: $height;
+}
+
+@mixin flex-grid ($display, $direction, $justify, $align){
+	display: $display;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+}
+
+@mixin blockCenter {
+	display: flex;
+	flex-direction: center;
+	justify-content: center;
+}
