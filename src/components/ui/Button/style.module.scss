@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+
+.button {
+	cursor: pointer;
+	background-color: $colorLight;
+	border-radius: 4px;
+	@include fontStyle;
+	padding: 11px 16px;
+	min-width: 143px;
+}

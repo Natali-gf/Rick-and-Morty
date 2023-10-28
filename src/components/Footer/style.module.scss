@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.footer {
+	@include blockColumnCenter;
+	text-align: center;
+	@include width-height(100%, 393px);
+	background-color: $colorBlack;
+	&__description {
+		@include fontStyle(13.5px, 22px, 700, $colorGreyLight);
+		text-transform: uppercase;
+		max-width: 212px;
+	}
+	&__logo {
+		height: 118px;
+		@include blockCenter;
+		&::before {
+			content: '';
+			background-image: url(../../assets/images/incode_group_logo.png);
+			@include width-height(50px);
+			border-radius: 50%;
+			display: block;
+			box-shadow: 0 0 80px 1px rgba(255, 255, 255, 0.80);
+		}
+	}
+	&__socials {
+		margin-top: 22px;
+	}
+	&__year {
+		@include fontStyle(12.5px, 22px, 400, $colorGreyLight);
+		height: 29px;
+		margin-top: 23px;
+	}
+}
+
+.socials {
+	@include flex-grid(flex, null, null, center);
+	height: 29px;
+	gap: 27px;
+	&__link {
+		&_heart {
+			content: url(../../assets/icons/heart.svg);
+		}
+		&_twitter {
+			content: url(../../assets/icons/twitter.svg);
+		}
+		&_github {
+			content: url(../../assets/icons/github.svg);
+		}
+	}
+}

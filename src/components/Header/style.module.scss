@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.header {
+	&__logo {
+		@include width-height(100%, 60px);
+		display: block;
+		padding: 10px 27px;
+		&::before {
+			content: '';
+			background-image: url('../../assets/icons/rick_and_morty.svg');
+			background-size: 40px;
+			background-repeat: no-repeat;
+			@include width-height(40px);
+			display: block;
+		}
+	}
+	&__background {
+		@include width-height(100%, 345px);
+		@include textCenter;
+		background: url('../../assets/images/rick_and_morty.png');
+		background-position: center;
+	}
+	&__title {
+		@include fontStyle(101.25px, 110%, 900, $colorBlack)
+	}
+
+
+}

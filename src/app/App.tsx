@@ -1,11 +1,16 @@
 import React from 'react';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from '../pages/HomePage/HomePage';
+import DetailPage from '../pages/DetailPage/DetailPage';
+import './App.scss';
 
-function App() {
+function App(): JSX.Element {
+
 	return (
-		<div className="App">
-
-		</div>
+		<Routes>
+			<Route path='/' element={<HomePage />} />
+			<Route path='/detail' element={<DetailPage />} />
+		</Routes>
 	);
 }
 

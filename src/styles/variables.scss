@@ -10,6 +10,9 @@ $colorRed: #D63D2E;
 $colorBorderGrey: #00000042;
 $colorWhite: #ffffff;
 
+$sizeScreenmedium: 650px;
+$sizeScreenSmall: 650px;
+
 @mixin width-height($width, $height: $width){
 	width: $width;
 	height: $height;
@@ -24,6 +27,27 @@ $colorWhite: #ffffff;
 
 @mixin blockCenter {
 	display: flex;
-	flex-direction: center;
 	justify-content: center;
+	align-items: center;
+}
+
+@mixin blockColumnCenter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin textCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+@mixin fontStyle($size: 16px, $height: 24px, $weight: 400, $color: $colorGreyDark){
+	font-size: $size;
+	line-height: $height;
+	font-weight: $weight;
+	color: $color;
 }
