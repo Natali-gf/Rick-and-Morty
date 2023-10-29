@@ -2,7 +2,7 @@
 
 .wrapper {
 	@include width-height(100%, 100vh);
-	@include flex-grid(flex, column, null, center);
+	@include flex-grid(flex, column, null, null);
 	&__content {
 		position: relative;
 		background-color: $colorGreyDark;

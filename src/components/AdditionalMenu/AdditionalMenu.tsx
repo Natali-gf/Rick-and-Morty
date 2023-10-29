@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { ConfigProvider, FloatButton } from 'antd';
 import { ReactComponent as IconMore } from '../../assets/icons/more_vertical.svg';
@@ -8,7 +7,7 @@ import { ReactComponent as IconInfo } from '../../assets/icons/info.svg';
 import s from './style.module.scss';
 
 function AdditionalMenu(): JSX.Element {
-	
+
 	return (
 		<ConfigProvider
 			theme={{ token: {

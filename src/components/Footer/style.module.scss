@@ -3,8 +3,8 @@
 .footer {
 	@include blockColumnCenter;
 	text-align: center;
-	@include width-height(100%, 393px);
 	background-color: $colorBlack;
+	padding: 47px 20px 84px;
 	&__description {
 		@include fontStyle(13.5px, 22px, 700, $colorGreyLight);
 		text-transform: uppercase;
@@ -27,6 +27,7 @@
 	}
 	&__year {
 		@include fontStyle(12.5px, 22px, 400, $colorGreyLight);
+		@include textCenter;
 		height: 29px;
 		margin-top: 23px;
 	}

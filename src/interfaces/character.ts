@@ -1,6 +1,7 @@
 import { CharacterGender } from "../enum/characterGender";
 import { CharacterStatus } from "../enum/characterStatus";
 import { Episode } from "./episode";
+import { Location } from "./location";
 
 export interface Character {
 	id: string | number,

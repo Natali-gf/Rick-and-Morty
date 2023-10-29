@@ -5,8 +5,15 @@
 	@include width-height(600px, 220px);
 	border-radius: 9px;
 	background-color: $colorGrey;
+	overflow: hidden;
 	&__image {
 		@include width-height(229px, 100%);
+		position: relative;
+		&>img {
+			display: block;
+			@include width-height(100%);
+			object-fit: cover;
+		}
 	}
 	&__info {
 		padding: 12.5px 13.5px 13.5px;
@@ -24,6 +31,7 @@
 		&_dot {
 			@include width-height(9px);
 			border-radius: 50%;
+			margin-right: 7px;
 		}
 		&_alive {
 			background-color: $colorGreen;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import s from './style.module.scss';
@@ -14,8 +13,8 @@ function CharacterCard({characterData}: Props): JSX.Element {
 						? s.info__status_alive
 						: characterData.status === CharacterStatus.Dead
 						? s.info__status_dead
-						: s.info__status_unknown
-console.log(characterData.location)
+						: s.info__status_unknown;
+
 	return (
 		<article className={s.characterCard}>
 			<div className={s.characterCard__image}>
@@ -34,7 +33,7 @@ console.log(characterData.location)
 				</div>
 				<div className={s.info__part}>
 					<div className={s.info__subtitle}>Last known location:</div>
-					{/* <div className={s.info__text}>{characterData.location.name}</div> */}
+					<div className={s.info__text}>{characterData.location.name}</div>
 				</div>
 				<div className={s.info__part}>
 					<div className={s.info__subtitle}>First seen in:</div>

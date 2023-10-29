@@ -1,19 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import s from './style.module.scss';
+import { useSelector } from 'react-redux';
 import { Character } from '../../interfaces/character';
+import { fetchCharacters } from '../../store/slices/charactersSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { RootState } from '../../store/store';
 import CharacterCard from '../CharacterCard/CharacterCard';
+import s from './style.module.scss';
 
 function CharacterList(): JSX.Element {
-	const characterList: Character[] = [];
+	const dispatch = useAppDispatch();
+	const { characters } = useSelector((state: RootState) => state.characters);
+
+	React.useEffect(() => {
+		dispatch(fetchCharacters())
+	}, [])
 
 	return (
-		<div className={s.characterList}>
-			{characterList.map((item: Character) => (
-				<CharacterCard characterData={item}/>
+		<section className={s.characterList}>
+			{characters.map((item: Character) => (
+				<CharacterCard
+					key={item.id}
+					characterData={item}/>
 			))}
-		</div>
+		</section>
 	);
 }
 

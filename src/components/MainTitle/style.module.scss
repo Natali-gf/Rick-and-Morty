@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.mainBlock {
+	&__background {
+		@include width-height(100%, 345px);
+		@include textCenter;
+		background: url('../../assets/images/rick_and_morty.png');
+		background-color: $colorWhite;
+		background-position: center;
+	}
+	&__title {
+		@include fontStyle(101.25px, 110%, 900, $colorBlack)
+	}
+}

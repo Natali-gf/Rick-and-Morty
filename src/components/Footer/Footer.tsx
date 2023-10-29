@@ -1,8 +1,8 @@
-import React from 'react';
 import cn from 'classnames';
 import s from './style.module.scss';
 
 function Footer(): JSX.Element {
+
 	return (
 		<footer className={s.footer}>
 			<div className={s.footer__description}>
