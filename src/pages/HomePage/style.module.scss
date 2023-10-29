@@ -4,6 +4,7 @@
 	@include width-height(100%, 100vh);
 	@include flex-grid(flex, column, null, center);
 	&__content {
+		position: relative;
 		background-color: $colorGreyDark;
 		flex: 1 1 auto;
 		width: 100%;

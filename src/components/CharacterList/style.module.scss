@@ -1,2 +1,8 @@
 @import '../../styles/variables.scss';
 
+.characterList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 27px;
+	padding: 20px;
+}

@@ -1,2 +1,12 @@
 @import '../../styles/variables.scss';
 
+.fabButton {
+	margin: auto;
+	&>div {
+		width: 40px!important;
+		height: 40px!important;
+	}
+	&__icon {
+		margin-left: -2px;
+	}
+}

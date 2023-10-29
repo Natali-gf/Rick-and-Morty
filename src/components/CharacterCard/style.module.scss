@@ -1,2 +1,44 @@
 @import '../../styles/variables.scss';
 
+.characterCard {
+	display: flex;
+	@include width-height(600px, 220px);
+	border-radius: 9px;
+	background-color: $colorGrey;
+	&__image {
+		@include width-height(229px, 100%);
+	}
+	&__info {
+		padding: 12.5px 13.5px 13.5px;
+	}
+}
+
+.info {
+	@include flex-grid(flex, column, space-between, null);
+	&__title {
+		@include fontStyle(27px, 29.7px, 800, $colorLight);
+	}
+	&__status {
+		@include fontStyle(16px, 26px, 500, $colorWhite);
+		@include flex-grid(flex, null, null, center);
+		&_dot {
+			@include width-height(9px);
+			border-radius: 50%;
+		}
+		&_alive {
+			background-color: $colorGreen;
+		}
+		&_dead {
+			background-color: $colorRed;
+		}
+		&_unknown {
+			background-color: $colorGreyLight;
+		}
+	}
+	&__subtitle {
+		@include fontStyle(15px, 26px, 500, $colorGreyLight);
+	}
+	&__text {
+		@include fontStyle(18px, 29.25px, 400, $colorLight);
+	}
+}
