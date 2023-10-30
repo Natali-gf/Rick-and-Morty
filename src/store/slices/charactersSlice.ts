@@ -8,20 +8,26 @@ import { charactersQuery } from "../../api/query/characters";
 type InitialState = {
 	status: StatusRequest,
 	characters: Character[],
+	characterCount: number,
 	error: string | null
 }
 
 const initialState: InitialState = {
 	status: Status.Loading,
     characters: [],
+	characterCount: 0,
     error: null,
 }
 
 export const fetchCharacters = createAsyncThunk(
 	'characters/fetchCharacters',
-	async function () {
+	async function (page: number) {
 		try {
-			const response = await api.post('', charactersQuery);
+			const response = await api.post('', {...charactersQuery,
+				variables: {
+					page: page
+				}
+			});
 
 			return response.data.data;
 		} catch (error) {
@@ -38,7 +44,8 @@ export const charactersSlice = createSlice({
 	extraReducers: {
 		[fetchCharacters.fulfilled.type]: (state, action) => {
 			state.status = Status.Resolved;
-			state.characters = action.payload.characters.results
+			state.characters = action.payload.characters.results;
+			state.characterCount = action.payload.characters.info.count;
 		}
 	}
 });

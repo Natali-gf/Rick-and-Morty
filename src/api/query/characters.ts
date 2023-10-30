@@ -1,7 +1,7 @@
 export const charactersQuery = {
 	operationName: 'Characters',
-	query: `query Characters {
-		characters {
+	query: `query Characters($page: Int) {
+		characters(page: $page) {
 			info {
 				count
 			}
@@ -25,5 +25,4 @@ export const charactersQuery = {
 			}
 		}
 	}`,
-	variables: {},
 };

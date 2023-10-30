@@ -1,9 +1,15 @@
 @import '../../styles/variables.scss';
 
-.characterList {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 27px;
-	padding: 20px;
+.characters {
+	@include flex-grid(flex, column, null, center);
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 27px;
+		padding: 20px;
+	}
+	&__pagination {
+		margin: 13px 13px 11.4px;
+	}
 }
