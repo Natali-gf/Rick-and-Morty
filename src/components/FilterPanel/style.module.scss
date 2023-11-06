@@ -4,7 +4,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding-top: 24px;
-	height: fit-content;
+	max-height: 81px;
 	&__button {
 		text-transform: uppercase;
 		height: 56px;

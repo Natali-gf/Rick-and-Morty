@@ -9,7 +9,7 @@ export interface ICharacterForm {
 	species: string,
 	status: string,
 	gender: string,
-}
+};
 
 export interface ICharacter{
 	id: string | number,
@@ -21,11 +21,11 @@ export interface ICharacter{
 	gender: CharacterGender,
 	location: ILocation,
 	episode: IEpisode[],
-}
+};
 
 export interface ICharacterDetail extends ICharacter{
 	origin: ILocation,
-}
+};
 
 export interface ICharacterResponse{
 	characters: {
@@ -34,4 +34,4 @@ export interface ICharacterResponse{
 		}
 		results: ICharacter[]
 	}
-}
+};

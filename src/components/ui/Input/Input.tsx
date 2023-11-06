@@ -1,7 +1,5 @@
-import React from 'react';
 import cn from 'classnames';
-import { FieldValues, UseFormRegister, useForm } from 'react-hook-form';
-// import Button from '../ui/Button/Button';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import s from './style.module.scss';
 
 type BaseInputProps = {
@@ -13,7 +11,6 @@ type BaseInputProps = {
 	id?: string,
 	autoComplete?: 'on' | 'off',
 	className?: string,
-	// onChange: () => void
 }
 
 export const BaseInput = (props: BaseInputProps) => {
@@ -23,12 +20,9 @@ export const BaseInput = (props: BaseInputProps) => {
 				type={props.type}
 				placeholder={props.placeholder}
 				defaultValue={props.defaultValue}
-				// name={props.name}
 				{...props.register(props.name)}
-				// value={props.value ?? ''}
-				// onChange={(e) => props.onChange(e.target.value)}
 				id={props.name}
 				autoComplete={props.autoComplete || 'off'}/>
 		</div>
-	)
-}
+	);
+};

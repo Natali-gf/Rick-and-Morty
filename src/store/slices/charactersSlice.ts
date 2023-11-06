@@ -13,7 +13,7 @@ type InitialState = {
 	currentCharacterId: number,
 	characterCount: number,
 	error: string | null
-}
+};
 
 const initialState: InitialState = {
 	status: Status.Loading,
@@ -27,7 +27,7 @@ const initialState: InitialState = {
 export const fetchCharacters = createAsyncThunk(
 	'characters/fetchCharacters',
 	async function(data: any, {rejectWithValue}) {
-		console.log(data.variables)
+		console.log(data.variables);
 		try {
 			const response: AxiosResponse<any, ICharacterResponse> = await api.post('',
 				{...charactersQuery, variables: data.variables}
@@ -36,7 +36,8 @@ export const fetchCharacters = createAsyncThunk(
 			if(response.status < 200 || response.status > 299) {
 				throw new Error('Error! Try later.');
 			}
-			console.log(response.data.data)
+			console.log(response.data.data);
+
 			return response.data.data.characters;
 
 		} catch (error: unknown) {
@@ -48,7 +49,7 @@ export const fetchCharacters = createAsyncThunk(
 export const fetchCharacterById = createAsyncThunk(
 	'characters/fetchCharacterById',
 	async function(id: number, {rejectWithValue}) {
-		console.log(id)
+		console.log(id);
 		try {
 			const response: AxiosResponse<any, ICharacterResponse> = await api.post('',
 				{...characterByIdsQuery, variables: {id: id}}
@@ -57,7 +58,8 @@ export const fetchCharacterById = createAsyncThunk(
 			if(response.status < 200 || response.status > 299) {
 				throw new Error('Error! Try later.');
 			}
-			
+			console.log(response.data.data.characte);
+
 			return response.data.data.character;
 
 		} catch (error: unknown) {
@@ -70,7 +72,9 @@ export const charactersSlice = createSlice({
     name: 'characters',
     initialState,
     reducers: {
-
+		setCurrentCharacterId: (state, action) => {
+			state.currentCharacterId = action.payload;
+		},
     },
 	extraReducers: {
 		[fetchCharacters.pending.type]: (state) => {
@@ -101,5 +105,7 @@ export const charactersSlice = createSlice({
 		},
 	},
 });
+
+export const { setCurrentCharacterId } = charactersSlice.actions;
 
 export default charactersSlice.reducer;

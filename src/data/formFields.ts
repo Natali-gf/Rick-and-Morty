@@ -1,4 +1,4 @@
-import { IFormField } from "../interfaces/formField"
+import { IFormField } from '../interfaces/formField';
 
 export const characterFormFields: IFormField[] = [
 	{
@@ -25,8 +25,8 @@ export const characterFormFields: IFormField[] = [
 		name: 'characterGender',
 		placeholder: 'Add Gender',
 		type: 'text',
-	}
-]
+	},
+];
 
 export const locationFormFields: IFormField[] = [
 	{
@@ -43,8 +43,8 @@ export const locationFormFields: IFormField[] = [
 		name: 'locationDimension',
 		placeholder: 'Add Dimension',
 		type: 'text',
-	}
-]
+	},
+];
 
 export const episodeFormFields: IFormField[] = [
 	{
@@ -57,4 +57,4 @@ export const episodeFormFields: IFormField[] = [
 		placeholder: 'Add Episodes',
 		type: 'text',
 	},
-]
+];

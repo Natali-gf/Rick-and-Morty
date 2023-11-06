@@ -13,10 +13,6 @@ type Props = {
 
 function FormFieldsGroup(props: Props): JSX.Element {
 
-	React.useEffect(() => {
-
-	}, []);
-
 	return (
 		<div className={cn(props.className, s.formFieldsGroup)}>
 			{props.fields.map((item, index) => (

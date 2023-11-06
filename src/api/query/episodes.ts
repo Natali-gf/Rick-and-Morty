@@ -1,4 +1,4 @@
-import { charactersFragment } from "./fragments";
+import { charactersFragment } from './fragments';
 
 export const episodesQuery = {
 	operationName: 'Episodes',

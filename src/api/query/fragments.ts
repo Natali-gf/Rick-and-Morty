@@ -38,4 +38,4 @@ export const charactersFragment = `
 			...episodeFields
 		}
 	}
-`
+`;

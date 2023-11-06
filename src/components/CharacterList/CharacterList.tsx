@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import { Alert, ConfigProvider, Pagination, Spin } from 'antd';
 import { ICharacter } from '../../interfaces/character';
 import { fetchCharacters } from '../../store/slices/charactersSlice';
@@ -19,8 +18,8 @@ function CharacterList(): JSX.Element {
 			variables: {
 				hasFilterCharacter: true,
 				hasFilterLocation: false,
-				hasFilterEpisode: false
-			}
+				hasFilterEpisode: false,
+			},
 		}));
 	}, [page]);
 
@@ -37,9 +36,9 @@ function CharacterList(): JSX.Element {
 							isDetailVisible={false}/>
 					))}
 				  </div>
-				: <Alert message={"Error!"}
+				: <Alert message={'Error!'}
 						 description={error}
-						 type={"error"}
+						 type={'error'}
 						 closable
 				/>
 			}
@@ -60,7 +59,6 @@ function CharacterList(): JSX.Element {
 					defaultCurrent={1}
 					total={characterCount}
 					defaultPageSize={20}
-					// responsive={true}
 					showSizeChanger={false}
 					showQuickJumper={false}
 					current={page}

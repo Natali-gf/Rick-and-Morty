@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import { Alert, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/store';
@@ -17,7 +16,7 @@ function DetailPage(): JSX.Element {
 	const { currentCharacterData, currentCharacterId, status, error } = useAppSelector((state: RootState) => state.characters);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacterById(currentCharacterId))
+		dispatch(fetchCharacterById(currentCharacterId));
 	}, []);
 
 	return (
@@ -31,9 +30,9 @@ function DetailPage(): JSX.Element {
 					: status === Status.Resolved
 					? <CharacterCard characterData={currentCharacterData!}
 									 isDetailVisible={true} />
-					: <Alert message={"Error!"}
+					: <Alert message={'Error!'}
 							 description={error}
-						 	 type={"error"}
+						 	 type={'error'}
 							 closable
 					  />
 				}

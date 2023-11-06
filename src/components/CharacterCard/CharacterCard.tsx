@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { ICharacter } from '../../interfaces/character';
 import { CharacterStatus } from '../../enum/characterStatus';
+import { useAppDispatch } from '../../store/hooks';
+import { HistoryAction } from '../../enum/history';
+import { IEpisode } from '../../interfaces/episode';
+import { setCurrentCharacterId } from '../../store/slices/charactersSlice';
 import s from './style.module.scss';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { RootState } from '../../store/store';
 
 type Props ={
 	characterData: ICharacter,
@@ -19,14 +21,22 @@ function CharacterCard({characterData, ...props}: Props): JSX.Element {
 						: s.info__status_unknown;
 
 	const dispatch = useAppDispatch();
-	// const { currentCharacterData } = useAppSelector((state: RootState) => state.characters);
-
-	// React.useEffect(() => {
-
-	// }, []);
 
 	function handleClick() {
-		// dispatch()
+		dispatch(setCurrentCharacterId(characterData.id));
+
+		const addToHistory = [{
+			type: HistoryAction.Viewing,
+			characterName: characterData.name,
+		}];
+
+		if(localStorage.historyActions) {
+			const newArray = [...JSON.parse(localStorage.historyActions), ...addToHistory];
+
+			localStorage.setItem('historyActions', JSON.stringify(newArray));
+		} else {
+			localStorage.setItem('historyActions', JSON.stringify(addToHistory));
+		}
 	}
 
 	return (
@@ -63,8 +73,9 @@ function CharacterCard({characterData, ...props}: Props): JSX.Element {
 						<div className={s.info__subtitle}>
 							List of episodes in which this character appeared:
 						</div>
-						{characterData.episode.map(item => (
-							<div className={s.info__text}>
+						{characterData.episode.map((item: IEpisode, index: number): JSX.Element => (
+							<div className={s.info__text}
+								 key={index}>
 								<span>{item.name}</span>
 							</div>
 						))}

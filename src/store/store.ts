@@ -1,11 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import characters from './slices/charactersSlice';
-import filters from "./slices/filtersSlice";
 
 export const store = configureStore({
 	reducer: {
 		characters,
-		filters
 	},
 });
 

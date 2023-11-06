@@ -1,0 +1,1 @@
+export type FilterName = 'Character' | 'Location' | 'Episode';

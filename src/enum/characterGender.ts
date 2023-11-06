@@ -3,4 +3,4 @@ export enum CharacterGender {
 	Male = 'Male',
 	Genderless = 'Genderless',
 	Unknown = 'Unknown',
-}
+};

@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+
+.history {
+
+	background-color: $colorWhite;
+	min-width: 300px;
+	max-width: 500px;
+	min-height: 300px;
+	max-height: 600px;
+	height: 50%;
+	width: 100%;
+	border-radius: 4px;
+	box-shadow: $buttonShadow;
+	display: flex;
+	flex-direction: column;
+	&__container {
+		padding: 15px;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		width: 100%;
+		position: relative;
+	}
+	&__results {
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		gap: 5px;
+	}
+	&__action {
+		background-color: $colorLight;
+		box-shadow: $buttonShadow;
+		border-radius: 4px;
+
+	}
+	&__title {
+		margin-bottom: 15px;
+	}
+	&__item {
+		background-color: $colorLight;
+		border-radius: 4px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		padding: 10px;
+	}
+	&__subtitle {
+		@include fontStyle(14px, 22px, 400, #00000099);
+		width: 100%;
+	}
+	&__text {
+		@include fontStyle(14px, 22px, 400, #000000DE);
+		background-color: $colorWhite;
+		box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.11);
+		display: flex;
+		border-radius: 4px;
+		padding: 2px 4px;
+		gap: 2px;
+	}
+	&__button {
+		background-color: transparent;
+		@include fontStyle(14px, 36px, 500, $colorBlue);
+		text-transform: uppercase;
+		width: 80px;
+		cursor: pointer;
+	}
+}
