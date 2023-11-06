@@ -1,1 +1,16 @@
 @import '../../styles/variables.scss';
+@import '../HomePage/style.module.scss';
+
+.wrapper {
+	@extend .wrapper;
+	&__content {
+		grid-template-rows: 345px 1fr;
+		grid-template-areas:
+			'title  title  title  title'
+			'. 		card   card   .';
+		&>div:nth-child(2) {
+			grid-area: card;
+			padding: 20px 0;
+		}
+	}
+}

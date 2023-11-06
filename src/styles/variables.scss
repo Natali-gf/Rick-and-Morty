@@ -10,8 +10,10 @@ $colorRed: #D63D2E;
 $colorBorderGrey: #00000042;
 $colorWhite: #ffffff;
 
-$sizeScreenmedium: 650px;
-$sizeScreenSmall: 650px;
+$buttonShadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.20);
+
+$sizeScreenmedium: 1120px;
+$sizeScreenSmall: 668px;
 
 @mixin width-height($width, $height: $width){
 	width: $width;

@@ -1,4 +1,4 @@
-export interface Location {
+export interface ILocation {
 	id: string | number,
 	name: string,
 	type?: string,

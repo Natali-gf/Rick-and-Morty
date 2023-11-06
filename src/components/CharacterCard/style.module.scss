@@ -18,6 +18,43 @@
 	&__info {
 		padding: 12.5px 13.5px 13.5px;
 	}
+	@media screen and (max-width: $sizeScreenSmall) {
+		flex-direction: column;
+		@include width-height(100%, fit-content);
+		&__image {
+			@include width-height(100%, 300px);
+			position: relative;
+			&>img {
+				display: block;
+				@include width-height(100%);
+				object-fit: cover;
+			}
+		}
+	}
+	&_fullsize {
+		@include width-height(100%, fit-content);
+		display: flex;
+		max-height: 595px;
+		overflow: hidden;
+		&>.characterCard__image {
+			@include width-height(595px);
+			&>img {
+				display: block;
+				@include width-height(100%);
+				object-fit: cover;
+			}
+		}
+		&>.characterCard__info {
+			min-width: 350px;
+		}
+		@media screen and (max-width: 800px) {
+			flex-direction: column;
+			max-height: none;
+			&>.characterCard__image {
+				@include width-height(100%, fit-content);
+			}
+		}
+	}
 }
 
 .info {
@@ -48,5 +85,12 @@
 	}
 	&__text {
 		@include fontStyle(18px, 29.25px, 400, $colorLight);
+	}
+	&_fullsize {
+		&> .info__text_episodes {
+			position: relative;
+			height: 100%;
+			overflow-y: scroll;
+		}
 	}
 }

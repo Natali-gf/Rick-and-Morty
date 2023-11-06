@@ -7,9 +7,21 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 27px;
-		padding: 20px;
+		padding: 20px 0;
 	}
 	&__pagination {
-		margin: 13px 13px 11.4px;
+		margin: 15px 0 12px;
+		display: flex;
+		flex-wrap: nowrap;
+		&>li{
+			&:first-child, &:last-child {
+				&>button {
+					color: $colorBlack;
+				}
+			}
+			background-color: $colorLight;
+			box-shadow: $buttonShadow;
+			color: $colorBlack;
+		}
 	}
 }

@@ -13,19 +13,19 @@ function Footer(): JSX.Element {
 				<li>
 					<a className={cn(s.socials__link, s.socials__link_github)}
 					   href={'https://github.com/'}
-					   target={'_blank'}
+					   target={'_blank'} rel="noreferrer"
 					/>
 				</li>
 				<li>
 					<a className={cn(s.socials__link, s.socials__link_twitter)}
 					   href='https://twitter.com/'
-					   target={'_blank'}
+					   target={'_blank'} rel="noreferrer"
 					/>
 				</li>
 				<li>
 					<a className={cn(s.socials__link, s.socials__link_heart)}
 					   href={''}
-					   target={'_blank'}
+					   target={'_blank'} rel="noreferrer"
 					/>
 				</li>
 			</ul>

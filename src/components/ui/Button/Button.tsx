@@ -17,7 +17,7 @@ function Button(props: Props): JSX.Element {
 			onClick={props.onClick}
 			disabled={props.disabled}
 		/>
-	)
+	);
 }
 
 export default Button;

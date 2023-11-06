@@ -1,43 +1,72 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
-import { Pagination } from 'antd';
-import { Character } from '../../interfaces/character';
+import { Alert, ConfigProvider, Pagination, Spin } from 'antd';
+import { ICharacter } from '../../interfaces/character';
 import { fetchCharacters } from '../../store/slices/charactersSlice';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/store';
+import { Status } from '../../enum/status';
 import CharacterCard from '../CharacterCard/CharacterCard';
 import s from './style.module.scss';
 
-
 function CharacterList(): JSX.Element {
 	const dispatch = useAppDispatch();
-	const { characters, characterCount } = useSelector((state: RootState) => state.characters);
-	const [ page, setPage ] = React.useState(1)
+	const { characters, characterCount, status, error } = useAppSelector((state: RootState) => state.characters);
+	const [ page, setPage ] = React.useState(1);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacters(page))
+		dispatch(fetchCharacters({page: page,
+			variables: {
+				hasFilterCharacter: true,
+				hasFilterLocation: false,
+				hasFilterEpisode: false
+			}
+		}));
 	}, [page]);
 
 	return (
 		<section className={s.characters}>
-			<div className={s.characters__list}>
-				{characters.map((item: Character) => (
-					<CharacterCard
-						key={item.id}
-						characterData={item}/>
-				))}
-			</div>
-			<Pagination className={s.characters__pagination}
-				defaultCurrent={1}
-				total={characterCount}
-				// defaultPageSize={6}//?? по 6 карточек или 3 ряда?
-				// responsive={true}
-				showSizeChanger={false}
-				showQuickJumper={false}
-				current={page}
-				onChange={setPage}
-			/>
+			{status === Status.Loading
+				? <Spin size="large" className={s.wrapper__content_spin}/>
+				: status === Status.Resolved
+				? <div className={s.characters__list}>
+					{characters.map((item: ICharacter) => (
+						<CharacterCard
+							key={item.id}
+							characterData={item}
+							isDetailVisible={false}/>
+					))}
+				  </div>
+				: <Alert message={"Error!"}
+						 description={error}
+						 type={"error"}
+						 closable
+				/>
+			}
+			<ConfigProvider
+				theme={{
+					token: {
+						colorPrimary: '#202329',
+						colorPrimaryHover:'#272B33',
+						borderRadius: 4,
+						colorBgContainer: '#F5F5F5',
+						colorText: '#F5F5F5',
+						colorTextDisabled:'#272b3399',
+						colorBgContainerDisabled:'#3C3E44',
+						lineType: 'none',
+					},
+				}}>
+				<Pagination className={s.characters__pagination}
+					defaultCurrent={1}
+					total={characterCount}
+					defaultPageSize={20}
+					// responsive={true}
+					showSizeChanger={false}
+					showQuickJumper={false}
+					current={page}
+					onChange={setPage}
+				/>
+			</ConfigProvider>
 		</section>
 	);
 }

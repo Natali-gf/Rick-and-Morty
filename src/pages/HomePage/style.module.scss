@@ -8,5 +8,22 @@
 		background-color: $colorGreyDark;
 		flex: 1 1 auto;
 		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr repeat(2, minmax(100px, 600px)) 1fr;
+		grid-template-rows: 345px fit-content(81px) 1fr;
+		column-gap: 27px;
+		grid-template-areas:
+			'title  title  title  title'
+			'filter filter filter filter'
+			'. 		card   card   .';
+		&>div:nth-child(1) {
+			grid-area: title;
+		}
+		&>div:nth-child(2) {
+			grid-area: filter;
+		}
+		&>section:nth-child(3) {
+			grid-area: card;
+		}
 	}
 }

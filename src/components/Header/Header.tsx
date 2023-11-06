@@ -7,7 +7,7 @@ function Header(): JSX.Element {
 		<header className={s.header}>
 			<nav className={s.header__nav}>
 				<Link className={s.header__logo}
-					to={'./'}
+					to={'/'}
 				/>
 			</nav>
 		</header>

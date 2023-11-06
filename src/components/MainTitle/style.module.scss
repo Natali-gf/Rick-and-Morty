@@ -9,6 +9,10 @@
 		background-position: center;
 	}
 	&__title {
-		@include fontStyle(101.25px, 110%, 900, $colorBlack)
+		@include fontStyle(101.25px, 110%, 900, $colorBlack);
+		@media screen and (max-width: $sizeScreenSmall) {
+			@include fontStyle(65px, 110%, 900, $colorBlack);
+			padding: 20px;
+		}
 	}
 }

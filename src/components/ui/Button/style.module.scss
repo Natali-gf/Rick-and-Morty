@@ -7,4 +7,9 @@
 	@include fontStyle;
 	padding: 11px 16px;
 	min-width: 143px;
+	&:disabled {
+		// background-color: $colorGreyLight;
+		color: $colorGreyLight;
+		cursor: not-allowed;
+	}
 }

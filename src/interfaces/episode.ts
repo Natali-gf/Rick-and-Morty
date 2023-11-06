@@ -1,4 +1,4 @@
-export interface Episode {
+export interface IEpisode {
 	id: string | number,
 	name: string,
 }

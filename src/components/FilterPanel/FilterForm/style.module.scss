@@ -1,0 +1,57 @@
+@import '../../../styles/variables.scss';
+
+.formFieldsGroup {
+	@include fontStyle;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	&__name {
+		display: flex;
+		justify-content: flex-end;
+		width: 20px;
+		margin: 0 0 0 8px;
+		transform: rotate(270deg);
+  		transform-origin: top left;
+	}
+	&__fields {
+		&>div {
+			border-bottom: 1px solid $colorBackgroundFill;
+			background-color: $colorLight;
+			&:first-child {
+				border-radius: 4px 4px 0 0;
+			}
+			&:last-child {
+				border-radius: 0 0 4px 4px;
+			}
+		}
+	}
+}
+
+.filterForm {
+	display: flex;
+	color: $colorGreyLight;
+	z-index: 100;
+	&__fields {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	&>&__field {
+		background-color: $colorLight;
+		margin-left: 28px;
+		border-radius: 4px 4px 0 0;
+	}
+	&__button {
+		text-transform: uppercase;
+		height: 56px;
+		margin-left: 28px;
+	}
+	@media screen and (max-width: $sizeScreenSmall) {
+		flex-wrap: wrap;
+		&__fields, &>&__field {
+			margin-bottom: 20px;
+		}
+	}
+}

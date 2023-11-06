@@ -1,2 +1,98 @@
 @import '../../styles/variables.scss';
 
+.filterPanel {
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 24px;
+	height: fit-content;
+	&__button {
+		text-transform: uppercase;
+		height: 56px;
+		margin-right: 13%;
+		margin-left: 5%;
+	}
+	&__background {
+		position: fixed;
+		background-color: $colorBackgroundFill;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		z-index: 100;
+	}
+	@media screen and (max-width: $sizeScreenmedium) {
+		max-height: 156px;
+		row-gap: 20px;
+		&__button {
+			margin-right: 100%;
+		}
+		&__select {
+			margin: 0 0 0 5%;
+			height: 56px;
+		}
+	}
+	@media screen and (max-width: 730px) {
+		max-height: 230px;
+		row-gap: 20px;
+		&>form:last-child {
+			margin-left: 1%;
+		}
+		&__select {
+			height: fit-content;
+		}
+	}
+	@media screen and (max-width: 483px) {
+		max-height: 310px;
+		&__button, &__select {
+			margin: 0 20% 0 8%;
+		}
+	}
+}
+
+.select {
+	position: relative;
+	@include fontStyle;
+	width: 213px;
+	display: flex;
+	z-index: 100;
+	&__title {
+		background-color: $colorLight;
+		border-radius: 4px 4px 0 0;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		height: 56px;
+		padding: 8px 12px;
+	}
+	&__group {
+		position: absolute;
+		left: 0;
+		top: 57px;
+		width: 213px;
+		height: 130px;
+		background-color: $colorWhite;
+		display: flex;
+		flex-direction: column;
+		@include fontStyle;
+		border-top: 1px solid $colorBlack;
+		padding: 16px 16px 16px 4px;
+		border-radius: 0 0 4px 4px;
+		&>label {
+			flex-direction: row-reverse;
+			justify-content: space-between;
+			align-items: center;
+			@include fontStyle;
+			height: 32px;
+			&::after {
+				display: none;
+			}
+		}
+	}
+	@media screen and (max-width: 730px) {
+		flex-direction: column;
+		&__group {
+			position: relative;
+			top: 0;
+		}
+	}
+}
