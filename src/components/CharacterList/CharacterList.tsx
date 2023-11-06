@@ -15,30 +15,34 @@ function CharacterList(): JSX.Element {
 			status,
 			error } = useAppSelector((state: RootState) => state.characters);
 	const [ page, setPage ] = React.useState(1);
+	const pageSize = 20;
+	const startIndex = (page - 1) * pageSize;
+	const endIndex = page * pageSize;
+	const charactersToShow = characters.slice(startIndex, endIndex);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacters({ variables: { page: page } }));
-	}, [page]);
+		dispatch(fetchCharacters({ variables: { page: page, character: true } }));
+	}, []);
 
 	return (
 		<section className={s.characters}>
-			{status === Status.Loading
-				? <Spin size="large" className={s.wrapper__content_spin}/>
-				: status === Status.Resolved
-				? <div className={s.characters__list}>
-					{characters.map((item: ICharacter) => (
+			{status === Status.Loading &&
+				<Spin size="large" className={s.wrapper__content_spin}/>}
+			{status === Status.Resolved &&
+				<div className={s.characters__list}>
+					{charactersToShow.map((item: ICharacter, index: number) => (
 						<CharacterCard
-							key={item.id}
+							key={`key${item.id}_${index}`}
 							characterData={item}
 							isDetailVisible={false}/>
 					))}
-				  </div>
-				: <Alert message={'Error!'}
+				</div>}
+			{status === Status.Rejected &&
+				<Alert message={'Error!'}
 						 description={error}
 						 type={'error'}
 						 closable
-				/>
-			}
+				/>}
 			<ConfigProvider
 				theme={{
 					token: {
@@ -55,7 +59,7 @@ function CharacterList(): JSX.Element {
 				<Pagination className={s.characters__pagination}
 					defaultCurrent={1}
 					total={characterCount}
-					defaultPageSize={20}
+					pageSize={pageSize}
 					showSizeChanger={false}
 					showQuickJumper={false}
 					current={page}

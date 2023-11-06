@@ -88,26 +88,34 @@ export const charactersSlice = createSlice({
 			state.error = null;
 		},
 		[fetchCharacters.fulfilled.type]: (state, action) => {
+			let characters: ICharacter[] = [];
+			let charactersCount: number = 0;
 			state.status = Status.Resolved;
-			state.characters = action.payload.characters.results;
-			state.characterCount = action.payload.characters.info.count;
 
+			if(action.payload.characters) {
+				characters = [...characters, ...action.payload.characters.results];
+				charactersCount += action.payload.characters.info.count;
+
+			}
 			if(action.payload.locations) {
-				state.characters.push(action.payload.locations.results.residents);
 				action.payload.locations.results.forEach(
 					(item: ILocationWithCharacters): void => {
-						state.characterCount += item.residents.length;
+						characters = [...characters, ...item.residents];
+						charactersCount += item.residents.length;
 					}
 				);
 			}
-			if(action.payload.episode) {
-				state.characters.push(action.payload.episodes.results.characters);
+			if(action.payload.episodes) {
 				action.payload.episodes.results.forEach(
 					(item: IEpisodeWithCharacters): void => {
-						state.characterCount += item.characters.length;
+						characters = [...characters, ...item.characters];
+						charactersCount += item.characters.length;
 					}
 				);
 			}
+
+			state.characters = characters;
+			state.characterCount = charactersCount;
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;

@@ -73,7 +73,7 @@ export const charactersQuery = {
 		locationDimension: '',
 		locationName: '',
 		locationType: '',
-		character: true,
+		character: false,
 		location: false,
 		episode: false,
 	},
