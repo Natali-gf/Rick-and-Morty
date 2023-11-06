@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormUnregister } from 'react-hook-form';
 import s from './style.module.scss';
 
 type BaseInputProps = {
@@ -7,6 +7,7 @@ type BaseInputProps = {
 	type: string,
 	placeholder: string,
 	register: UseFormRegister<FieldValues>,
+	unregister: UseFormUnregister<FieldValues>,
 	defaultValue?: string
 	id?: string,
 	autoComplete?: 'on' | 'off',
@@ -14,6 +15,7 @@ type BaseInputProps = {
 }
 
 export const BaseInput = (props: BaseInputProps) => {
+
 	return (
 		<div className={cn(s.inputField, props.className)}>
 			<input className={cn(s.inputField__input)}

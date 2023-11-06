@@ -18,7 +18,7 @@ function Footer(): JSX.Element {
 				</li>
 				<li>
 					<a className={cn(s.socials__link, s.socials__link_twitter)}
-					   href='https://twitter.com/'
+					   href={'https://twitter.com/'}
 					   target={'_blank'} rel="noreferrer"
 					/>
 				</li>

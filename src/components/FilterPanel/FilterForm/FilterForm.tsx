@@ -1,7 +1,6 @@
 import React from 'react';
-import cn from 'classnames';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch } from '../../../store/hooks';
 import { fetchCharacters } from '../../../store/slices/charactersSlice';
 import Button from '../../ui/Button/Button';
 import { BaseInput } from '../../ui/Input/Input';
@@ -14,43 +13,31 @@ import s from './style.module.scss';
 type Props = {
 	filterOptions: FilterOptions[],
 	showfilterFields: boolean,
+	showFiltersArea: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function FilterForm(props: Props): JSX.Element {
 	const dispatch = useAppDispatch();
-	// const {character} = useAppSelector(state => state.filters)
-	const { register, handleSubmit, formState: {isDirty} } = useForm({ mode: 'all' });
+	const { register,
+			unregister,
+			handleSubmit,
+			formState: {isDirty} } = useForm({ mode: 'all' });
 
 	const onSubmit = async(data: any) => {
-
-		dispatch(fetchCharacters({
-			page: 1,
-			variables: {
-				characterName: data.characterName,
-				characterGender: data.characterGender,
-				characterSpecies: data.characterSpecies,
-				characterStatus: data.characterStatus,
-				characterType: data.characterType,
-				episodeEpisodes: data.episodeEpisodes,
-				episodeName: data.episodeName,
-				locationDimension: data.locationDimension,
-				locationName: data.locationName,
-				locationType: data.locationType,
-				hasFilterCharacter: true,
-				hasFilterLocation: false,
-				hasFilterEpisode: false,
-		}}));
-
 		const dictFields: IHistorySearching[] = [];
+		const variables: {[key:string]: string | boolean} = {};
 		let checkTypeFilter: string = '';
 
 		for(const key in data) {
 			if(data[key] !== '') {
+				variables[key] = data[key];
 
 				const words: string[] = key.split(/(?=[A-Z])/);
 
 				if(checkTypeFilter === '' || checkTypeFilter !== words[0]) {
 					checkTypeFilter = words[0];
+
+					variables[words[0]] = true;
 
 					dictFields.push({
 						type: HistoryAction.Searching,
@@ -71,6 +58,13 @@ function FilterForm(props: Props): JSX.Element {
 			}
 		}
 
+		dispatch(fetchCharacters({
+			variables: {
+				page: 1,
+				...variables,
+		}}));
+		props.showFiltersArea(false);
+
 		if(localStorage.historyActions) {
 			const newArray = [...JSON.parse(localStorage.historyActions), ...dictFields];
 
@@ -84,20 +78,24 @@ function FilterForm(props: Props): JSX.Element {
 		<form className={s.filterForm}
 		   	  onSubmit={handleSubmit(onSubmit)}>
 			{!props.showfilterFields
-				? <BaseInput className={s.filterForm__field}
-							 name={'characterName'}
-							 type={'text'}
-							 placeholder={'Add key words to find'}
-							 register={register}
+				? <BaseInput
+					className={s.filterForm__field}
+					name={'characterNames'}
+					type={'text'}
+					placeholder={'Add key words to find'}
+					register={register}
+					unregister={unregister}
 				  />
 				: <div className={s.filterForm__fields}>
 					{props.filterOptions.map(
 						(item: FilterOptions, index: number): JSX.Element => (
 							<div className={s.group} key={index}>
 								<div className={s.group__name}>{item.name}</div>
-								<FormFieldsGroup className={s.group__fields}
-												 fields={item.options}
-												 register={register}
+								<FormFieldsGroup
+									className={s.group__fields}
+									fields={item.options}
+									register={register}
+									unregister={unregister}
 								/>
 							</div>
 						)

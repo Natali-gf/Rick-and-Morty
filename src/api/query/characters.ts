@@ -16,9 +16,9 @@ export const charactersQuery = {
 			$locationType: String,
 			$episodeName: String,
 			$episodeEpisodes: String,
-			$hasFilterCharacter: Boolean!,
-			$hasFilterLocation: Boolean!,
-			$hasFilterEpisode: Boolean!) {
+			$character: Boolean!,
+			$location: Boolean!,
+			$episode: Boolean!) {
 			characters(
 				page: $page,
 				filter: {
@@ -27,7 +27,7 @@ export const charactersQuery = {
 					species: $characterSpecies,
 					status: $characterStatus,
 					type: $characterType
-				}) @include(if: $hasFilterCharacter) {
+				}) @include(if: $character) {
 				info {
 					count
 				}
@@ -41,7 +41,7 @@ export const charactersQuery = {
 					name: $locationName,
 					dimension: $locationDimension,
 					type: $locationType
-				}) @include(if: $hasFilterLocation) {
+				}) @include(if: $location) {
 				results {
 					residents {
 						...allCharacterFields
@@ -53,7 +53,7 @@ export const charactersQuery = {
 				filter: {
 					name: $episodeName,
 					episode: $episodeEpisodes
-				}) @include(if: $hasFilterEpisode) {
+				}) @include(if: $episode) {
 				results {
 					characters {
 						...allCharacterFields
@@ -62,6 +62,21 @@ export const charactersQuery = {
 			}
 		}
 	`,
+	variables: {
+		characterName: '',
+		characterGender: '',
+		characterSpecies: '',
+		characterStatus: '',
+		characterType: '',
+		episodeEpisodes: '',
+		episodeName: '',
+		locationDimension: '',
+		locationName: '',
+		locationType: '',
+		character: true,
+		location: false,
+		episode: false,
+	},
 };
 
 export const characterByIdsQuery = {

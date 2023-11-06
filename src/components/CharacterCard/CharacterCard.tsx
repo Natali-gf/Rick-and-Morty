@@ -31,7 +31,9 @@ function CharacterCard({characterData, ...props}: Props): JSX.Element {
 		}];
 
 		if(localStorage.historyActions) {
-			const newArray = [...JSON.parse(localStorage.historyActions), ...addToHistory];
+			const newArray = [
+				...JSON.parse(localStorage.historyActions), ...addToHistory,
+			];
 
 			localStorage.setItem('historyActions', JSON.stringify(newArray));
 		} else {
@@ -40,11 +42,13 @@ function CharacterCard({characterData, ...props}: Props): JSX.Element {
 	}
 
 	return (
-		<article className={cn(s.characterCard, {[s.characterCard_fullsize]: props.isDetailVisible})}>
+		<article className={cn(s.characterCard,
+							{[s.characterCard_fullsize]: props.isDetailVisible})}>
 			<div className={s.characterCard__image}>
 				<img src={characterData.image} alt={characterData.name} />
 			</div>
-			<div className={cn(s.characterCard__info, s.info, {[s.info_fullsize]: props.isDetailVisible})}>
+			<div className={cn(s.characterCard__info, s.info,
+							{[s.info_fullsize]: props.isDetailVisible})}>
 				<div className={s.info__part}>
 					<Link className={s.info__title}
 						  to={'/detail'}
@@ -62,23 +66,29 @@ function CharacterCard({characterData, ...props}: Props): JSX.Element {
 				</div>
 				<div className={s.info__part}>
 					<div className={s.info__subtitle}>First seen in:</div>
-					<div className={s.info__text}>{characterData.episode[0].name}</div>
+					<div className={s.info__text}>
+						{characterData.episode[0].name}
+					</div>
 				</div>
 				{props.isDetailVisible && <>
 					<div className={s.info__part}>
 						<div className={s.info__subtitle}>Origin location:</div>
-						<div className={s.info__text}>{characterData.episode[0].name}</div>
+						<div className={s.info__text}>
+							{characterData.episode[0].name}
+						</div>
 					</div>
 					<div className={cn(s.info__part, s.info__part_episodes)}>
 						<div className={s.info__subtitle}>
 							List of episodes in which this character appeared:
 						</div>
-						{characterData.episode.map((item: IEpisode, index: number): JSX.Element => (
-							<div className={s.info__text}
-								 key={index}>
-								<span>{item.name}</span>
-							</div>
-						))}
+						{characterData.episode.map(
+							(item: IEpisode, index: number): JSX.Element => (
+								<div className={s.info__text}
+									 key={index}>
+									<span>{item.name}</span>
+								</div>
+							)
+						)}
 					</div>
 				</>}
 			</div>

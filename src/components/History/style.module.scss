@@ -27,12 +27,26 @@
 		flex-direction: column;
 		height: 100%;
 		gap: 5px;
+		overflow-y: scroll;
+		&::-webkit-scrollbar {
+			// width: 0;
+			width: 10px;
+			border-radius: 5px;
+		}
+		&::-webkit-scrollbar-track {
+			border-radius: 16px;
+			background-color: $colorGreyLight;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: $colorLight;
+			border-radius: 5px;
+			border: 2px solid $colorGreyLight;
+		}
 	}
 	&__action {
 		background-color: $colorLight;
 		box-shadow: $buttonShadow;
 		border-radius: 4px;
-
 	}
 	&__title {
 		margin-bottom: 15px;

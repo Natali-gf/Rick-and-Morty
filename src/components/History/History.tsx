@@ -10,7 +10,8 @@ type Props ={
 }
 
 function History(props: Props): JSX.Element {
-	const history: Array<IHistorySearching | IHistoryViewing> = JSON.parse(localStorage.historyActions) || [];
+	const history: Array<IHistorySearching | IHistoryViewing>
+			= JSON.parse(localStorage.historyActions) || [];
 
 	return (
 		<>
@@ -18,29 +19,34 @@ function History(props: Props): JSX.Element {
 				<div className={s.history__container}>
 					<h3 className={s.history__title}>History</h3>
 					<div className={s.history__results}>
-						{history.map((item: IHistorySearching | IHistoryViewing, index: number): JSX.Element => (
-							<div className={s.history__action}
-								 key={index}>
-								{item.type === HistoryAction.Viewing
-									? <div className={s.history__item}>
-										<div className={s.history__subtitle}>
-											Looked at the character card: {item.characterName}
-										</div>
-									</div>
-									: <div className={s.history__item}>
-										<div className={s.history__subtitle}>
-											{item.filterName}
-										</div>
-										{item.filterFields.map((field, index: number): JSX.Element => (
-											<div className={s.history__text}
-												 key={index}>
-												{field.field}: "{field.value}"
+						{history.map(
+							(item: IHistorySearching | IHistoryViewing,
+							index: number): JSX.Element => (
+								<div className={s.history__action}
+									 key={index}>
+									{item.type === HistoryAction.Viewing
+										? <div className={s.history__item}>
+											<div className={s.history__subtitle}>
+												Looked at the character card:
+												{item.characterName}
 											</div>
-										))}
-									</div>
-								}
-							</div>
-						))}
+										  </div>
+										: <div className={s.history__item}>
+											<div className={s.history__subtitle}>
+												{item.filterName}
+											</div>
+											{item.filterFields.map(
+												(field, index: number): JSX.Element => (
+												<div className={s.history__text}
+													 key={index}>
+													{field.field}: "{field.value}"
+												</div>
+											))}
+										</div>
+									}
+								</div>
+							)
+						)}
 					</div>
 					<button className={s.history__button}
 							onClick={() => props.setIsHistoryVisible(false)}>

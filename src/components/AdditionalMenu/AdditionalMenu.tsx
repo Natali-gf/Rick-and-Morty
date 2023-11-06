@@ -14,12 +14,15 @@ function AdditionalMenu(): JSX.Element {
 	const [isHistoryVisible, setIsHistoryVisible] = React.useState<boolean>(false);
 
 	function downloadCharacters(characters: ICharacter[]) {
-		let csvData: string = 'id, name, species, status, image, type, gender, location, episode\n';
+		let csvData: string
+			= 'id, name, species, status, image, type, gender, location, episode\n';
 
 		characters.forEach((character: ICharacter): void => {
-			const { id, name, species, status, image, type, gender, location, episode } = character;
+			const { id, name, species, status, image,
+					type, gender, location, episode } = character;
 
-			csvData += `${id}, ${name}, ${species}, ${status}, ${image}, ${type}, ${gender}, ${location.name}, ${episode[0].name}\n`;
+			csvData += `${id}, ${name}, ${species}, ${status}, ${image},
+						${type}, ${gender}, ${location.name}, ${episode[0].name}\n`;
 		});
 
 		const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });

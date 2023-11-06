@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import api from '../../api/axios';
-import { Status } from '../../enum/status';
+import { Status, StatusResponse } from '../../enum/status';
 import { ICharacter, ICharacterResponse } from '../../interfaces/character';
 import { StatusRequest } from '../../types/statusRequest';
 import { charactersQuery, characterByIdsQuery } from '../../api/query/characters';
+import { ILocationWithCharacters } from '../../interfaces/location';
+import { IEpisodeWithCharacters } from '../../interfaces/episode';
 
 type InitialState = {
 	status: StatusRequest,
@@ -27,18 +29,20 @@ const initialState: InitialState = {
 export const fetchCharacters = createAsyncThunk(
 	'characters/fetchCharacters',
 	async function(data: any, {rejectWithValue}) {
-		console.log(data.variables);
 		try {
 			const response: AxiosResponse<any, ICharacterResponse> = await api.post('',
-				{...charactersQuery, variables: data.variables}
+				{
+					...charactersQuery,
+					variables: { ...charactersQuery.variables, ...data.variables },
+				}
 			);
 
-			if(response.status < 200 || response.status > 299) {
+			if(response.status < StatusResponse.Success
+				|| response.status >= StatusResponse.Redirection) {
 				throw new Error('Error! Try later.');
 			}
-			console.log(response.data.data);
 
-			return response.data.data.characters;
+			return response.data.data;
 
 		} catch (error: unknown) {
 			return rejectWithValue(error);
@@ -49,16 +53,15 @@ export const fetchCharacters = createAsyncThunk(
 export const fetchCharacterById = createAsyncThunk(
 	'characters/fetchCharacterById',
 	async function(id: number, {rejectWithValue}) {
-		console.log(id);
 		try {
 			const response: AxiosResponse<any, ICharacterResponse> = await api.post('',
 				{...characterByIdsQuery, variables: {id: id}}
 			);
 
-			if(response.status < 200 || response.status > 299) {
+			if(response.status < StatusResponse.Success
+				|| response.status >= StatusResponse.Redirection) {
 				throw new Error('Error! Try later.');
 			}
-			console.log(response.data.data.characte);
 
 			return response.data.data.character;
 
@@ -83,8 +86,25 @@ export const charactersSlice = createSlice({
 		},
 		[fetchCharacters.fulfilled.type]: (state, action) => {
 			state.status = Status.Resolved;
-			state.characters = action.payload.results;
-			state.characterCount = action.payload.info.count;
+			state.characters = action.payload.characters.results;
+			state.characterCount = action.payload.characters.info.count;
+
+			if(action.payload.locations) {
+				state.characters.push(action.payload.locations.results.residents);
+				action.payload.locations.results.forEach(
+					(item: ILocationWithCharacters): void => {
+						state.characterCount += item.residents.length;
+					}
+				);
+			}
+			if(action.payload.episode) {
+				state.characters.push(action.payload.episodes.results.characters);
+				action.payload.episodes.results.forEach(
+					(item: IEpisodeWithCharacters): void => {
+						state.characterCount += item.characters.length;
+					}
+				);
+			}
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;

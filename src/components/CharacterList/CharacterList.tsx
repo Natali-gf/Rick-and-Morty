@@ -10,17 +10,14 @@ import s from './style.module.scss';
 
 function CharacterList(): JSX.Element {
 	const dispatch = useAppDispatch();
-	const { characters, characterCount, status, error } = useAppSelector((state: RootState) => state.characters);
+	const { characters,
+			characterCount,
+			status,
+			error } = useAppSelector((state: RootState) => state.characters);
 	const [ page, setPage ] = React.useState(1);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacters({page: page,
-			variables: {
-				hasFilterCharacter: true,
-				hasFilterLocation: false,
-				hasFilterEpisode: false,
-			},
-		}));
+		dispatch(fetchCharacters({ variables: { page: page } }));
 	}, [page]);
 
 	return (

@@ -13,7 +13,10 @@ import s from './style.module.scss';
 
 function DetailPage(): JSX.Element {
 	const dispatch = useAppDispatch();
-	const { currentCharacterData, currentCharacterId, status, error } = useAppSelector((state: RootState) => state.characters);
+	const { currentCharacterData,
+			currentCharacterId,
+			status,
+			error } = useAppSelector((state: RootState) => state.characters);
 
 	React.useEffect(() => {
 		dispatch(fetchCharacterById(currentCharacterId));
@@ -28,12 +31,15 @@ function DetailPage(): JSX.Element {
 				{status === Status.Loading
 					? <Spin size="large" className={s.wrapper__content_spin}/>
 					: status === Status.Resolved
-					? <CharacterCard characterData={currentCharacterData!}
-									 isDetailVisible={true} />
-					: <Alert message={'Error!'}
-							 description={error}
-						 	 type={'error'}
-							 closable
+					? <CharacterCard
+						characterData={currentCharacterData!}
+						isDetailVisible={true}
+					  />
+					: <Alert
+						message={'Error!'}
+						description={error}
+						type={'error'}
+						closable
 					  />
 				}
 				</div>

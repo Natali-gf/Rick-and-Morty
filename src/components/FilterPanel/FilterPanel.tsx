@@ -2,19 +2,20 @@ import React from 'react';
 import cn from 'classnames';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { Checkbox, ConfigProvider } from 'antd';
-import { characterFormFields, episodeFormFields, locationFormFields } from '../../data/formFields';
+import { characterFormFields,
+		 episodeFormFields,
+		 locationFormFields } from '../../data/formFields';
 import { IFormField } from '../../interfaces/formField';
 import Button from '../ui/Button/Button';
 import s from './style.module.scss';
 import FilterForm from './FilterForm/FilterForm';
-
 
 export type FilterOptions = {
 	name: string,
 	options: IFormField[] | []
 }
 
-const filterBy = ['Character', 'Location', 'Episodes'];
+export const filterBy = ['Character', 'Location', 'Episodes'];
 
 function FilterPanel(): JSX.Element {
 	const [ filterOptions, setFilterOptions ] = React.useState<FilterOptions[] | []>([]);
@@ -69,7 +70,8 @@ function FilterPanel(): JSX.Element {
 					}
 				</div>
 				<FilterForm filterOptions={filterOptions}
-							showfilterFields={filtersArea} />
+							showfilterFields={filtersArea}
+							showFiltersArea={showFiltersArea} />
 			</>}
 		</div>
 	);
