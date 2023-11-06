@@ -11,6 +11,12 @@
 		&>div:nth-child(2) {
 			grid-area: card;
 			padding: 20px 0;
+			margin-bottom: 50px;
 		}
 	}
+}
+
+.character {
+	display: flex;
+	justify-content: center;
 }

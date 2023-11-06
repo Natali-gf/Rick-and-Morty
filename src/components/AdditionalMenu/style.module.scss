@@ -2,6 +2,9 @@
 
 .fabButton {
 	margin: auto;
+	&_disabled {
+		cursor: not-allowed;
+	}
 	&>div {
 		width: 40px!important;
 		height: 40px!important;

@@ -78,6 +78,9 @@ export const charactersSlice = createSlice({
 		setCurrentCharacterId: (state, action) => {
 			state.currentCharacterId = action.payload;
 		},
+		clearCurrentCharacterData: (state) => {
+			state.currentCharacterData = null;
+		},
     },
 	extraReducers: {
 		[fetchCharacters.pending.type]: (state) => {
@@ -126,6 +129,6 @@ export const charactersSlice = createSlice({
 	},
 });
 
-export const { setCurrentCharacterId } = charactersSlice.actions;
+export const { setCurrentCharacterId, clearCurrentCharacterData } = charactersSlice.actions;
 
 export default charactersSlice.reducer;

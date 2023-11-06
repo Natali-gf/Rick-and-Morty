@@ -87,6 +87,22 @@
 		@include fontStyle(18px, 29.25px, 400, $colorLight);
 	}
 	&_fullsize {
+		gap: 20px;
+		overflow-y: scroll;
+		flex: 1 1 auto;
+		&::-webkit-scrollbar {
+			width: 10px;
+			border-radius: 5px;
+		}
+		&::-webkit-scrollbar-track {
+			border-radius: 16px;
+			background-color: $colorGreyLight;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: $colorGrey;
+			border-radius: 5px;
+			border: 2px solid $colorGreyLight;
+		}
 		&> .info__text_episodes {
 			position: relative;
 			height: 100%;

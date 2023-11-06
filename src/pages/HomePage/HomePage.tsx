@@ -15,7 +15,7 @@ function HomePage(): JSX.Element {
 				<MainTitle />
 				<FilterPanel />
 				<CharacterList />
-				<AdditionalMenu />
+				<AdditionalMenu downloadDisabled={false} />
 			</main>
 			<Footer />
 		</div>

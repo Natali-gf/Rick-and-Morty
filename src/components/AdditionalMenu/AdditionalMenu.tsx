@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { ConfigProvider, FloatButton } from 'antd';
 import { ReactComponent as IconMore } from '../../assets/icons/more_vertical.svg';
 import { ReactComponent as IconDownload } from '../../assets/icons/download.svg';
@@ -9,7 +10,11 @@ import { ICharacter } from '../../interfaces/character';
 import History from '../History/History';
 import s from './style.module.scss';
 
-function AdditionalMenu(): JSX.Element {
+type Props = {
+	downloadDisabled: boolean,
+}
+
+function AdditionalMenu({downloadDisabled}: Props): JSX.Element {
 	const { characters } = useAppSelector((state: RootState) => state.characters);
 	const [isHistoryVisible, setIsHistoryVisible] = React.useState<boolean>(false);
 
@@ -21,8 +26,7 @@ function AdditionalMenu(): JSX.Element {
 			const { id, name, species, status, image,
 					type, gender, location, episode } = character;
 
-			csvData += `${id}, ${name}, ${species}, ${status}, ${image},
-						${type}, ${gender}, ${location.name}, ${episode[0].name}\n`;
+			csvData += `${id}, ${name}, ${species}, ${status}, ${image}, ${type}, ${gender}, ${location.name}, ${episode[0].name}\n`;
 		});
 
 		const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
@@ -53,9 +57,11 @@ function AdditionalMenu(): JSX.Element {
 								 icon={<IconInfo />}
 								 onClick={() => setIsHistoryVisible(true)}
 					/>
-					<FloatButton className={s.fabButton}
+					<FloatButton className={cn(s.fabButton,
+											{[s.fabButton_disabled]: downloadDisabled})}
 								 icon={<IconDownload />}
-								 onClick={() => downloadCharacters(characters)}
+								 {...(downloadDisabled ? {} :
+								 {onClick: () => downloadCharacters(characters)})}
 					/>
 				</ConfigProvider>
 			</FloatButton.Group>
