@@ -7,6 +7,7 @@ import { StatusRequest } from '../../types/statusRequest';
 import { charactersQuery, characterByIdsQuery } from '../../api/query/characters';
 import { ILocationWithCharacters } from '../../interfaces/location';
 import { IEpisodeWithCharacters } from '../../interfaces/episode';
+import { IFieldsName } from '../../interfaces/formField';
 
 type InitialState = {
 	status: StatusRequest,
@@ -28,7 +29,7 @@ const initialState: InitialState = {
 
 export const fetchCharacters = createAsyncThunk(
 	'characters/fetchCharacters',
-	async function(data: any, {rejectWithValue}) {
+	async function(data: {variables: IFieldsName}, {rejectWithValue}) {
 		try {
 			const response: AxiosResponse<any, ICharacterResponse> = await api.post('',
 				{

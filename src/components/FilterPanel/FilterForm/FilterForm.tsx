@@ -9,6 +9,7 @@ import { HistoryAction } from '../../../enum/history';
 import { IHistorySearching } from '../../../interfaces/history';
 import FormFieldsGroup from './FormFieldsGroup';
 import s from './style.module.scss';
+import { saveFilterValues } from '../../../store/slices/filtersSlice';
 
 type Props = {
 	filterOptions: FilterOptions[],
@@ -57,8 +58,14 @@ function FilterForm(props: Props): JSX.Element {
 				}
 			}
 		}
+		if(!dictFields.length) variables.character = true;
 
 		dispatch(fetchCharacters({
+			variables: {
+				page: 1,
+				...variables,
+		}}));
+		dispatch(saveFilterValues({
 			variables: {
 				page: 1,
 				...variables,
@@ -80,7 +87,7 @@ function FilterForm(props: Props): JSX.Element {
 			{!props.showfilterFields
 				? <BaseInput
 					className={s.filterForm__field}
-					name={'characterNames'}
+					name={'characterName'}
 					type={'text'}
 					placeholder={'Add key words to find'}
 					register={register}

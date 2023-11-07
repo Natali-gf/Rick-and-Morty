@@ -14,15 +14,17 @@ function CharacterList(): JSX.Element {
 			characterCount,
 			status,
 			error } = useAppSelector((state: RootState) => state.characters);
+	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const [ page, setPage ] = React.useState(1);
 	const pageSize = 20;
-	const startIndex = (page - 1) * pageSize;
-	const endIndex = page * pageSize;
-	const charactersToShow = characters.slice(startIndex, endIndex);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacters({ variables: { page: page, character: true } }));
+		dispatch(fetchCharacters({ variables: filters }));
 	}, []);
+
+	React.useEffect(() => {
+		dispatch(fetchCharacters({ variables: {...filters, page: page} }));
+	}, [page]);
 
 	return (
 		<section className={s.characters}>
@@ -30,7 +32,7 @@ function CharacterList(): JSX.Element {
 				<Spin size="large" className={s.wrapper__content_spin}/>}
 			{status === Status.Resolved &&
 				<div className={s.characters__list}>
-					{charactersToShow.map((item: ICharacter, index: number) => (
+					{characters.map((item: ICharacter, index: number) => (
 						<CharacterCard
 							key={`key${item.id}_${index}`}
 							characterData={item}
