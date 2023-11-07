@@ -15,8 +15,8 @@ function CharacterList(): JSX.Element {
 			status,
 			error } = useAppSelector((state: RootState) => state.characters);
 	const { filters } = useAppSelector((state: RootState) => state.filters);
-	const [ page, setPage ] = React.useState(1);
-	const [ requestPage, setRequestPage ] = React.useState(1);
+	const [ page, setPage ] = React.useState<number>(1);
+	const [ requestPage, setRequestPage ] = React.useState<number>(1);
 	const pageSize: number = 10;
 	const endIndex: number = Math.trunc(page / requestPage) * pageSize;
 	const startIndex: number = endIndex - pageSize;
@@ -32,7 +32,8 @@ function CharacterList(): JSX.Element {
 
 	function handleClick(currentPage: number) {
 		const pageForRequest: number =
-				Math.ceil(currentPage * pageSize / 20);
+				Math.round(currentPage * pageSize / (characters.length < 20
+													? 20 : characters.length));
 
 		setRequestPage(pageForRequest);
 		setPage(currentPage);
