@@ -114,7 +114,7 @@ export const charactersSlice = createSlice({
 					}
 				);
 			}
-
+			
 			state.characters = characters;
 			state.characterCount = charactersCount;
 		},

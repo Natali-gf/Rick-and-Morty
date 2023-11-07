@@ -63,6 +63,7 @@ export const charactersQuery = {
 		}
 	`,
 	variables: {
+		page: 1,
 		characterName: '',
 		characterGender: '',
 		characterSpecies: '',

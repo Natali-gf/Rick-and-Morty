@@ -16,15 +16,28 @@ function CharacterList(): JSX.Element {
 			error } = useAppSelector((state: RootState) => state.characters);
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const [ page, setPage ] = React.useState(1);
-	const pageSize = 20;
+	const [ requestPage, setRequestPage ] = React.useState(1);
+	const pageSize: number = 10;
+	const endIndex: number = Math.trunc(page / requestPage) * pageSize;
+	const startIndex: number = endIndex - pageSize;
+	const charactersToShow: ICharacter[] = characters.slice(startIndex, endIndex);
 
 	React.useEffect(() => {
 		dispatch(fetchCharacters({ variables: filters }));
 	}, []);
 
 	React.useEffect(() => {
-		dispatch(fetchCharacters({ variables: {...filters, page: page} }));
-	}, [page]);
+		console.log(requestPage)
+		dispatch(fetchCharacters({ variables: {...filters, page: requestPage} }));
+	}, [requestPage]);
+
+	function handleClick(currentPage: number) {
+		const pageForRequest: number =
+				Math.ceil(currentPage * pageSize / 20);
+
+		setRequestPage(pageForRequest);
+		setPage(currentPage);
+	}
 
 	return (
 		<section className={s.characters}>
@@ -32,7 +45,7 @@ function CharacterList(): JSX.Element {
 				<Spin size="large" className={s.wrapper__content_spin}/>}
 			{status === Status.Resolved &&
 				<div className={s.characters__list}>
-					{characters.map((item: ICharacter, index: number) => (
+					{charactersToShow.map((item: ICharacter, index: number) => (
 						<CharacterCard
 							key={`key${item.id}_${index}`}
 							characterData={item}
@@ -65,7 +78,7 @@ function CharacterList(): JSX.Element {
 					showSizeChanger={false}
 					showQuickJumper={false}
 					current={page}
-					onChange={setPage}
+					onChange={handleClick}
 				/>
 			</ConfigProvider>
 		</section>
