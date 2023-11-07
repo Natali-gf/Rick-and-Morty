@@ -41,6 +41,8 @@
 			border-radius: 5px;
 			border: 2px solid $colorGreyLight;
 		}
+		scrollbar-width: thin;
+		scrollbar-color: $colorGreyLight $colorLight;
 	}
 	&__action {
 		background-color: $colorLight;

@@ -103,6 +103,8 @@
 			border-radius: 5px;
 			border: 2px solid $colorGreyLight;
 		}
+		scrollbar-width: thin;
+		scrollbar-color: $colorGreyLight $colorGrey;
 		&> .info__text_episodes {
 			position: relative;
 			height: 100%;
