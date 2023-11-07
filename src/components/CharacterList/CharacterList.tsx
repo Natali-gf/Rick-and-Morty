@@ -27,7 +27,6 @@ function CharacterList(): JSX.Element {
 	}, []);
 
 	React.useEffect(() => {
-		console.log(requestPage)
 		dispatch(fetchCharacters({ variables: {...filters, page: requestPage} }));
 	}, [requestPage]);
 
