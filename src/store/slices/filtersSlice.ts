@@ -18,7 +18,7 @@ export const filtersSlice = createSlice({
     reducers: {
 		saveFilterValues: (state, action) => {
 			state.filters = action.payload.variables
-		}
+		},
     },
 });
 
