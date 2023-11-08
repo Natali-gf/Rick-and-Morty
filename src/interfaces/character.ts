@@ -12,7 +12,7 @@ export interface ICharacterForm {
 };
 
 export interface ICharacter{
-	id: string | number,
+	id: number,
 	name: string,
 	image: string,
 	type: string,

@@ -89,6 +89,8 @@ export const charactersSlice = createSlice({
 			state.error = null;
 		},
 		[fetchCharacters.fulfilled.type]: (state, action) => {
+			const dictIds: {[key: number]: number} = {};
+			let idCount: number = 0;
 			let characters: ICharacter[] = [];
 			let charactersCount: number = 0;
 			state.status = Status.Resolved;
@@ -96,7 +98,7 @@ export const charactersSlice = createSlice({
 			if(action.payload.characters) {
 				characters = [...characters, ...action.payload.characters.results];
 				charactersCount += action.payload.characters.info.count;
-
+				idCount += 1;
 			}
 			if(action.payload.locations) {
 				action.payload.locations.results.forEach(
@@ -105,6 +107,7 @@ export const charactersSlice = createSlice({
 						charactersCount += item.residents.length;
 					}
 				);
+				idCount += 1;
 			}
 			if(action.payload.episodes) {
 				action.payload.episodes.results.forEach(
@@ -113,10 +116,19 @@ export const charactersSlice = createSlice({
 						charactersCount += item.characters.length;
 					}
 				);
+				idCount += 1;
 			}
-			
-			state.characters = characters;
-			state.characterCount = charactersCount;
+
+			const filteringCharacters = characters.filter((item) => {
+				dictIds[item.id]
+					? dictIds[item.id] += 1
+					: dictIds[item.id] = 1;
+
+				return dictIds[item.id] === idCount;
+			});
+
+			state.characters = filteringCharacters;
+			state.characterCount = filteringCharacters.length;
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;
