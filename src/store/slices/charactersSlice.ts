@@ -128,7 +128,7 @@ export const charactersSlice = createSlice({
 			});
 
 			state.characters = filteringCharacters;
-			state.characterCount = idCount > 1
+			state.characterCount = (action.payload.locations || action.payload.episodes)
 				? filteringCharacters.length
 				: action.payload.characters.info.count;
 		},
