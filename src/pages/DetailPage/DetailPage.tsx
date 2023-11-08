@@ -22,25 +22,25 @@ function DetailPage(): JSX.Element {
 		dispatch(fetchCharacterById(currentCharacterId));
 
 		return () => {
-			dispatch(clearCurrentCharacterData())
-		}
+			dispatch(clearCurrentCharacterData());
+		};
 	}, []);
-	
+
 	return (
 		<div className={s.wrapper}>
 			<Header />
 			<main className={s.wrapper__content}>
 				<MainTitle />
 				<div className={s.character}>
-				{status === Status.Loading && !currentCharacterData &&
-					<Spin size="large" className={s.wrapper__content_spin}/>}
-				{status === Status.Resolved && currentCharacterData &&
-					<CharacterCard
+				{status === Status.Loading && !currentCharacterData
+					&& <Spin size="large" className={s.wrapper__content_spin}/>}
+				{status === Status.Resolved && currentCharacterData
+					&& <CharacterCard
 						characterData={currentCharacterData!}
 						isDetailVisible={true}
 					/>}
-				{status === Status.Rejected &&
-					<Alert
+				{status === Status.Rejected
+					&& <Alert
 						message={'Error!'}
 						description={error}
 						type={'error'}

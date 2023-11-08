@@ -60,8 +60,8 @@ function AdditionalMenu({downloadDisabled}: Props): JSX.Element {
 					<FloatButton className={cn(s.fabButton,
 											{[s.fabButton_disabled]: downloadDisabled})}
 								 icon={<IconDownload />}
-								 {...(downloadDisabled ? {} :
-								 {onClick: () => downloadCharacters(characters)})}
+								 {...(downloadDisabled ? {}
+								 : {onClick: () => downloadCharacters(characters)})}
 					/>
 				</ConfigProvider>
 			</FloatButton.Group>

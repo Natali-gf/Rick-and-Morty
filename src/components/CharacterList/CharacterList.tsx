@@ -31,9 +31,9 @@ function CharacterList(): JSX.Element {
 	}, [requestPage]);
 
 	function handleClick(currentPage: number) {
-		const pageForRequest: number =
-				Math.round(currentPage * pageSize / (characters.length < 20
-													? 20 : characters.length));
+		const pageForRequest: number
+				= Math.round(currentPage * pageSize / (characters.length < 20
+													? 20 : characters.length)) || 1;
 
 		setRequestPage(pageForRequest);
 		setPage(currentPage);
@@ -41,10 +41,10 @@ function CharacterList(): JSX.Element {
 
 	return (
 		<section className={s.characters}>
-			{status === Status.Loading &&
-				<Spin size="large" className={s.wrapper__content_spin}/>}
-			{status === Status.Resolved &&
-				<div className={s.characters__list}>
+			{status === Status.Loading
+				&& <Spin size="large" className={s.wrapper__content_spin}/>}
+			{status === Status.Resolved
+				&& <div className={s.characters__list}>
 					{charactersToShow.map((item: ICharacter, index: number) => (
 						<CharacterCard
 							key={`key${item.id}_${index}`}
@@ -52,8 +52,8 @@ function CharacterList(): JSX.Element {
 							isDetailVisible={false}/>
 					))}
 				</div>}
-			{status === Status.Rejected &&
-				<Alert message={'Error!'}
+			{status === Status.Rejected
+				&& <Alert message={'Error!'}
 						 description={error}
 						 type={'error'}
 						 closable

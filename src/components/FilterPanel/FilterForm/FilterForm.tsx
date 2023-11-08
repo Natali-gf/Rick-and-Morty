@@ -7,9 +7,9 @@ import { BaseInput } from '../../ui/Input/Input';
 import { FilterOptions } from '../FilterPanel';
 import { HistoryAction } from '../../../enum/history';
 import { IHistorySearching } from '../../../interfaces/history';
+import { saveFilterValues } from '../../../store/slices/filtersSlice';
 import FormFieldsGroup from './FormFieldsGroup';
 import s from './style.module.scss';
-import { saveFilterValues } from '../../../store/slices/filtersSlice';
 
 type Props = {
 	filterOptions: FilterOptions[],

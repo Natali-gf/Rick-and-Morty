@@ -10,8 +10,8 @@ type Props ={
 }
 
 function History(props: Props): JSX.Element {
-	const history: Array<IHistorySearching | IHistoryViewing> =
-			localStorage.historyActions
+	const history: Array<IHistorySearching | IHistoryViewing>
+			= localStorage.historyActions
 			? JSON.parse(localStorage.historyActions) : [];
 
 	return (

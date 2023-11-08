@@ -9,7 +9,7 @@ const initialState: InitialState = {
 	filters: {
 		page: 1,
 		character: true,
-	}
+	},
 };
 
 export const filtersSlice = createSlice({
@@ -17,11 +17,11 @@ export const filtersSlice = createSlice({
     initialState,
     reducers: {
 		saveFilterValues: (state, action) => {
-			state.filters = action.payload.variables
+			state.filters = action.payload.variables;
 		},
     },
 });
 
-export const { saveFilterValues } = filtersSlice.actions
+export const { saveFilterValues } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
