@@ -128,7 +128,9 @@ export const charactersSlice = createSlice({
 			});
 
 			state.characters = filteringCharacters;
-			state.characterCount = filteringCharacters.length;
+			state.characterCount = idCount > 1
+				? filteringCharacters.length
+				: action.payload.characters.info.count;
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;
