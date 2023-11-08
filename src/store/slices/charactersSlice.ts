@@ -43,7 +43,60 @@ export const fetchCharacters = createAsyncThunk(
 				throw new Error('Error! Try later.');
 			}
 
-			return response.data.data;
+			const dictIds: {[key: number]: number} = {};
+			let idCount: number = 0;
+			let characters: ICharacter[] = [];
+			let charactersCount: number = 0;
+
+			if(response.data.data.characters) {
+				characters = [...characters, ...response.data.data.characters.results];
+				charactersCount += response.data.data.characters.info.count;
+				idCount += 1;
+			}
+			if(response.data.data.locations) {
+				response.data.data.locations.results.forEach(
+					(item: ILocationWithCharacters): void => {
+						characters = [...characters, ...item.residents];
+						charactersCount += item.residents.length;
+					}
+				);
+				idCount += 1;
+				// console.log(response.data.data.locations.info.pages)
+				if(response.data.data.locations.info.pages > 1) {
+					console.log(1)
+					const promises = []
+					for (let i = 2; i <= response.data.data.locations.info.pages; i++) {
+						//...
+					}
+
+					// Promise.allSettled(promises);
+				}
+			}
+			if(response.data.data.episodes) {
+				response.data.data.episodes.results.forEach(
+					(item: IEpisodeWithCharacters): void => {
+						characters = [...characters, ...item.characters];
+						charactersCount += item.characters.length;
+					}
+				);
+				idCount += 1;
+			}
+
+			const filteringCharacters = characters.filter((item) => {
+				dictIds[item.id]
+					? dictIds[item.id] += 1
+					: dictIds[item.id] = 1;
+
+				return dictIds[item.id] === idCount;
+			});
+
+
+			return {
+				characters: filteringCharacters,
+				count: (response.data.data.locations || response.data.data.episodes)
+					? filteringCharacters.length
+					: response.data.data.characters.info.count
+			};
 
 		} catch (error: unknown) {
 			return rejectWithValue(error);
@@ -89,48 +142,52 @@ export const charactersSlice = createSlice({
 			state.error = null;
 		},
 		[fetchCharacters.fulfilled.type]: (state, action) => {
-			const dictIds: {[key: number]: number} = {};
-			let idCount: number = 0;
-			let characters: ICharacter[] = [];
-			let charactersCount: number = 0;
+			// const dictIds: {[key: number]: number} = {};
+			// let idCount: number = 0;
+			// let characters: ICharacter[] = [];
+			// let charactersCount: number = 0;
+			// state.status = Status.Resolved;
+
+			// if(action.payload.characters) {
+			// 	characters = [...characters, ...action.payload.characters.results];
+			// 	charactersCount += action.payload.characters.info.count;
+			// 	idCount += 1;
+			// }
+			// if(action.payload.locations) {
+			// 	action.payload.locations.results.forEach(
+			// 		(item: ILocationWithCharacters): void => {
+			// 			characters = [...characters, ...item.residents];
+			// 			charactersCount += item.residents.length;
+			// 		}
+			// 	);
+			// 	idCount += 1;
+			// }
+			// if(action.payload.episodes) {
+			// 	action.payload.episodes.results.forEach(
+			// 		(item: IEpisodeWithCharacters): void => {
+			// 			characters = [...characters, ...item.characters];
+			// 			charactersCount += item.characters.length;
+			// 		}
+			// 	);
+			// 	idCount += 1;
+			// }
+
+			// const filteringCharacters = characters.filter((item) => {
+			// 	dictIds[item.id]
+			// 		? dictIds[item.id] += 1
+			// 		: dictIds[item.id] = 1;
+
+			// 	return dictIds[item.id] === idCount;
+			// });
+
+			// state.characters = filteringCharacters;
+			// state.characterCount = idCount > 1
+			// 	? filteringCharacters.length
+			// 	: action.payload.characters.info.count;
+console.log(action.payload)
 			state.status = Status.Resolved;
-
-			if(action.payload.characters) {
-				characters = [...characters, ...action.payload.characters.results];
-				charactersCount += action.payload.characters.info.count;
-				idCount += 1;
-			}
-			if(action.payload.locations) {
-				action.payload.locations.results.forEach(
-					(item: ILocationWithCharacters): void => {
-						characters = [...characters, ...item.residents];
-						charactersCount += item.residents.length;
-					}
-				);
-				idCount += 1;
-			}
-			if(action.payload.episodes) {
-				action.payload.episodes.results.forEach(
-					(item: IEpisodeWithCharacters): void => {
-						characters = [...characters, ...item.characters];
-						charactersCount += item.characters.length;
-					}
-				);
-				idCount += 1;
-			}
-
-			const filteringCharacters = characters.filter((item) => {
-				dictIds[item.id]
-					? dictIds[item.id] += 1
-					: dictIds[item.id] = 1;
-
-				return dictIds[item.id] === idCount;
-			});
-
-			state.characters = filteringCharacters;
-			state.characterCount = idCount > 1
-				? filteringCharacters.length
-				: action.payload.characters.info.count;
+			state.characters = action.payload.characters;
+			state.characterCount = action.payload.count;
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;

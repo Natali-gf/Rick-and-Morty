@@ -30,6 +30,7 @@ export const charactersQuery = {
 				}) @include(if: $character) {
 				info {
 					count
+					pages
 				}
 				results {
 					...allCharacterFields
@@ -42,6 +43,10 @@ export const charactersQuery = {
 					dimension: $locationDimension,
 					type: $locationType
 				}) @include(if: $location) {
+				info {
+					count
+					pages
+				}
 				results {
 					residents {
 						...allCharacterFields
@@ -54,6 +59,10 @@ export const charactersQuery = {
 					name: $episodeName,
 					episode: $episodeEpisodes
 				}) @include(if: $episode) {
+				info {
+					count
+					pages
+				}
 				results {
 					characters {
 						...allCharacterFields
