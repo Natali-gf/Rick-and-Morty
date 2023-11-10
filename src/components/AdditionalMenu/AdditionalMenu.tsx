@@ -15,7 +15,7 @@ type Props = {
 }
 
 function AdditionalMenu({downloadDisabled}: Props): JSX.Element {
-	const { characters } = useAppSelector((state: RootState) => state.characters);
+	const { charactersCurrentPage } = useAppSelector((state: RootState) => state.characters);
 	const [isHistoryVisible, setIsHistoryVisible] = React.useState<boolean>(false);
 
 	function downloadCharacters(characters: ICharacter[]) {
@@ -61,7 +61,8 @@ function AdditionalMenu({downloadDisabled}: Props): JSX.Element {
 											{[s.fabButton_disabled]: downloadDisabled})}
 								 icon={<IconDownload />}
 								 {...(downloadDisabled ? {}
-								 : {onClick: () => downloadCharacters(characters)})}
+								 : {onClick: () =>
+									downloadCharacters(charactersCurrentPage)})}
 					/>
 				</ConfigProvider>
 			</FloatButton.Group>

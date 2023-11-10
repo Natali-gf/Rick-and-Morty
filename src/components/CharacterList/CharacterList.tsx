@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, ConfigProvider, Pagination, Spin } from 'antd';
 import { ICharacter } from '../../interfaces/character';
-import { fetchCharacters } from '../../store/slices/charactersSlice';
+import { fetchCharacters, setCharactersCurrentPage } from '../../store/slices/charactersSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { RootState } from '../../store/store';
 import { Status } from '../../enum/status';
@@ -29,6 +29,10 @@ function CharacterList(): JSX.Element {
 	React.useEffect(() => {
 		dispatch(fetchCharacters({ variables: {...filters, page: requestPage} }));
 	}, [requestPage]);
+
+	React.useEffect(() => {
+		dispatch(setCharactersCurrentPage(charactersToShow));
+	}, [page]);
 
 	function handleClick(currentPage: number) {
 		const pageForRequest: number

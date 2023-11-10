@@ -12,6 +12,7 @@ import { IFieldsName } from '../../interfaces/formField';
 type InitialState = {
 	status: StatusRequest,
 	characters: ICharacter[],
+	charactersCurrentPage: ICharacter[],
 	currentCharacterData: ICharacter | null,
 	currentCharacterId: number,
 	characterCount: number,
@@ -23,6 +24,7 @@ const initialState: InitialState = {
 	currentCharacterId: 1,
 	currentCharacterData: null,
     characters: [],
+	charactersCurrentPage: [],
 	characterCount: 0,
     error: null,
 };
@@ -154,6 +156,9 @@ export const charactersSlice = createSlice({
 		clearCurrentCharacterData: (state) => {
 			state.currentCharacterData = null;
 		},
+		setCharactersCurrentPage: (state, action) => {
+			state.charactersCurrentPage = action.payload;
+		},
     },
 	extraReducers: {
 		[fetchCharacters.pending.type]: (state) => {
@@ -164,6 +169,7 @@ export const charactersSlice = createSlice({
 			state.status = Status.Resolved;
 			state.characters = action.payload.characters;
 			state.characterCount = action.payload.count;
+			state.charactersCurrentPage = action.payload.characters.slice(0, 10);
 		},
 		[fetchCharacters.rejected.type]: (state, action) => {
 			state.status = Status.Rejected;
@@ -188,6 +194,7 @@ export const charactersSlice = createSlice({
 export const {
 	setCurrentCharacterId,
 	clearCurrentCharacterData,
+	setCharactersCurrentPage,
 } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
